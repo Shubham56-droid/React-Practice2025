@@ -1,6 +1,6 @@
 import React from "react";
 
-function DataBox({ data }) {
+function DataBox({data,searchVal,handleSearch}) {
   
   return (
     <div
@@ -11,7 +11,9 @@ function DataBox({ data }) {
         <input
           type="text"
           placeholder="Search User..."
-          className="form-control form-control-lg  "
+          className="form-control form-control-lg"
+          value={searchVal}
+          onChange={handleSearch}
         />
       </div>
       <div className="container mt-4">
@@ -20,11 +22,11 @@ function DataBox({ data }) {
             {data &&
               data.map((e,i) => (
                 <tr>
-                  <td style={(i%2==0)?{background:"#222",color:"#fff"}:{background:"#fff",color:"#222"}}>{i+1}</td>
+                  <td style={(i%2==0)?{background:"#222",color:"#fff"}:{background:"#fff",color:"#222"}}>{e.id}</td>
                   <td style={(i%2==0)?{background:"#222",color:"#fff"}:{background:"#fff",color:"#222"}}>{e.name}</td>
                   <td style={(i%2==0)?{background:"#222",color:"#fff"}:{background:"#fff",color:"#222"}}>{e.age}</td>
                   <td style={(i%2==0)?{background:"#222",color:"#fff"}:{background:"#fff",color:"#222"}}>{e.email}</td>
-                  <td style={(i%2==0)?{background:"#222",color:"#fff"}:{background:"#fff",color:"#222"}}>{e.city}</td>
+                  <td style={(i%2==0)?{background:"#222",color:"#fff"}:{background:"#fff",color:"#222"}}>{e.address}</td>
                 </tr>
               ))}
           </tbody>
