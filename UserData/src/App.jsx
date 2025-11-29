@@ -1,31 +1,30 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import UserForm from './components/UserForm'
+import DataBox from './components/DataBox';
+import './App.css'
+import Data from './assets/data';
 import { useState } from 'react';
-import './App.css';
-import Data from './data'
-import ItemBox from './components/itemBox';
-import SearchBox from './components/SearchBox';
-import Mode from './components/Mode';
 
 function App() {
+  const [data,setData] = useState([...Data]);
+  const [nameData,setNameData] = useState("");
+  const [age,setAge] = useState("");
+  const [email,setEmail] = useState("");
+  const [address,setAddress] = useState("");
 
-  const [dataArr,setDataArr] = useState(Data);
-  const [input,setInput] = useState("");
-  const [modeColor,setModeColor] = useState(false);
-
-  const handleSearch = (e) => {
-    let value = e.target.value;
-    setInput(value);
-    const filterArr = Data.filter((e)=>e.name.toLowerCase().includes(value.toLowerCase()));
-    setDataArr(filterArr);
+  const handleAddData = () => {
+      setData([...data,{name:nameData,age:Number(age),email:email,address:address}])
+      setNameData("");
+      setAddress("");
+      setAge("");
+      setEmail("");
   }
 
   return (
-    <div className="mainContainer" style={modeColor?{background:"#222",color:"#fff"}:{background:"#fff",color:"#000"}}>
-    <Mode setModeColor={setModeColor}/>
-    <h1 className="text-center font-monospace heading">User Data</h1>
-    <SearchBox input={input} setInput={setInput} handleSearch={handleSearch}/>
-    <ItemBox data={dataArr}/>
-
-    </div>
+    <>
+    <UserForm nameData={nameData} setNameData={setNameData} age={age} setAge={setAge} email={email} setEmail={setEmail} address={address} setAddress={setAddress} handleAddData={handleAddData}/>
+    <DataBox data={data}/>
+    </>
   )
 }
 
